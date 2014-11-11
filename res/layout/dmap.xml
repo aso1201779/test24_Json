@@ -8,43 +8,6 @@
       android:orientation="vertical"
       tools:context=".Dmap" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp" >
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_weight="1.01"
-            android:text="マップ" />
-
-        <Button
-            android:id="@+id/D_entry"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_weight="1"
-            android:text="投稿" />
-
-	    <Button
-	        android:id="@+id/endbtn"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="0dp"
-	        android:layout_marginRight="0dp"
-	        android:layout_marginTop="0dp"
-	        android:layout_weight="0.96"
-	        android:text="END" />
-
-    </LinearLayout>
-
     <WebView
         android:id="@+id/webview"
         android:layout_width="fill_parent"

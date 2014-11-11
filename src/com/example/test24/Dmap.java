@@ -20,7 +20,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 
 public class Dmap extends Activity implements LocationListener , View.OnClickListener{
 
@@ -49,10 +48,6 @@ public class Dmap extends Activity implements LocationListener , View.OnClickLis
 	@Override
 	protected void onResume() {
 		// TODO 自動生成されたメソッド・スタブ
-		Button end =(Button)findViewById(R.id.endbtn);
-		end.setOnClickListener(this);
-		Button Dentry =(Button)findViewById(R.id.D_entry);
-		Dentry.setOnClickListener(this);
 
 
 		if(mLocationManager != null){
@@ -102,40 +97,34 @@ public class Dmap extends Activity implements LocationListener , View.OnClickLis
 	@Override
 	public void onClick(View v) {
 		// TODO 自動生成されたメソッド・スタブ
-		AlertDialog.Builder alertDialogBuilder;
-		AlertDialog alert;
-		switch(v.getId()) {
-			case R.id.endbtn:
-				alertDialogBuilder = new AlertDialog.Builder(this);
-				alertDialogBuilder.setMessage("ドライブを終了しますか？")
-				.setPositiveButton("OK",new DialogInterface.OnClickListener() {
+//		AlertDialog.Builder alertDialogBuilder;
+//		AlertDialog alert;
+//			case R.id.endbtn:
+//				alertDialogBuilder = new AlertDialog.Builder(this);
+//				alertDialogBuilder.setMessage("ドライブを終了しますか？")
+//				.setPositiveButton("OK",new DialogInterface.OnClickListener() {
+//
+//					@Override
+//					public void onClick(DialogInterface dialog, int id) {
+//						// TODO 自動生成されたメソッド・スタブ
+//						Intent intent = new Intent(Dmap.this,home.class);
+//						startActivity(intent);
+//					}
+//				});
+//				//設定画面へ移動するかの問い合わせダイアログを表示
+//				//キャンセルボタン処理
+//				alertDialogBuilder.setNegativeButton("キャンセル",new DialogInterface.OnClickListener() {
+//
+//					@Override
+//					public void onClick(DialogInterface dialog, int id) {
+//						// TODO 自動生成されたメソッド・スタブ
+//						dialog.cancel();
+//					}
+//				});
+//				alert = alertDialogBuilder.create();
+//				alert.show();
+//				break;
 
-					@Override
-					public void onClick(DialogInterface dialog, int id) {
-						// TODO 自動生成されたメソッド・スタブ
-						Intent intent = new Intent(Dmap.this,home.class);
-						startActivity(intent);
-					}
-				});
-				//設定画面へ移動するかの問い合わせダイアログを表示
-				//キャンセルボタン処理
-				alertDialogBuilder.setNegativeButton("キャンセル",new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int id) {
-						// TODO 自動生成されたメソッド・スタブ
-						dialog.cancel();
-					}
-				});
-				alert = alertDialogBuilder.create();
-				alert.show();
-				break;
-
-			case R.id.D_entry:
-				Intent intent = new Intent(Dmap.this,D_entry.class);
-				startActivity(intent);
-				break;
-		}
 	}
 
 	@Override

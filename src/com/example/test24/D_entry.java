@@ -10,15 +10,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RatingBar;
 
 public class D_entry extends Activity implements View.OnClickListener{
 
 	SQLiteDatabase db = null;
 	MySQLiteOpenHelper helper = null;
 	double inputReview = 0;
-	private RatingBar ratingBar;
-	String hoshi = null;
 
 
 	@Override
@@ -26,12 +23,6 @@ public class D_entry extends Activity implements View.OnClickListener{
 		// TODO 自動生成されたメソッド・スタブ
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.d_entry);
-		((RatingBar)findViewById(R.id.ratingBar)).setIsIndicator(false);
-	}
-		
-
-	public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-		hosi = ratingBar.getRating()
 	}
 
 	@Override
@@ -69,7 +60,7 @@ public class D_entry extends Activity implements View.OnClickListener{
 					&& inputLocation != null && !inputLocation.isEmpty()
 					&& inputComment != null && !inputComment.isEmpty()){
 
-					helper.insertSpot(db, inputTitle, inputLocation, inputComment, inputReview);
+					helper.insertSpot(db, inputTitle, inputLocation, inputComment);
 
 					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 					alertDialogBuilder.setMessage("登録しました。")
@@ -81,7 +72,7 @@ public class D_entry extends Activity implements View.OnClickListener{
 						@Override
 						public void onClick(DialogInterface dialog, int id) {
 							// TODO 自動生成されたメソッド・スタブ
-							Intent intent = new Intent(D_entry.this,Dmap.class);
+							Intent intent = new Intent(D_entry.this,Tab.class);
 							startActivity(intent);
 						}
 					});
