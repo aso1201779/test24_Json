@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class Login extends Activity implements View.OnClickListener{
 
 	SQLiteDatabase db = null;
 	MySQLiteOpenHelper helper = null;
@@ -69,7 +69,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
 						String strSelect = helper.selectMember(db, inputloginID, inputloginpass);
 						if(strSelect != null){
-							intent = new Intent(MainActivity.this, home.class);
+							intent = new Intent(Login.this, Home.class);
 							intent.putExtra("username", strSelect);
 							startActivity(intent);
 
@@ -101,11 +101,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			pass.setText("");
 			break;
 		case R.id.member_entry:
-			intent = new Intent(MainActivity.this, member_entry.class);
+			intent = new Intent(Login.this, Member_entry.class);
 			startActivity(intent);
 			break;
 		case R.id.notMember:
-			intent = new Intent(MainActivity.this, home.class);
+			intent = new Intent(Login.this, Home.class);
 			startActivity(intent);
 			break;
 

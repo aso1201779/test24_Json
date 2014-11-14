@@ -20,7 +20,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 					"Member (memberID TEXT PRIMARY KEY NOT NULL , Password TEXT NOT NULL , username TEXT NOT NULL , birthyear TEXT NOT NULL , seibetu TEXT NOT NULL);");
 
 		db.execSQL("CREATE TABLE IF NOT EXISTS " +
-					"Spot (title TEXT PRIMARY KEY NOT NULL , location TEXT NOT NULL , comment TEXT NOT NULL);");
+					"Spot (title TEXT PRIMARY KEY NOT NULL ,  comment TEXT NOT NULL);");
 	}
 
 	@Override
@@ -65,9 +65,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 	return stSelect;
 	}
 
-	public void insertSpot(SQLiteDatabase db, String inputTitle, String inputLocation, String inputComment) {
+	public void insertSpot(SQLiteDatabase db, String inputTitle, String inputComment) {
 		// TODO 自動生成されたメソッド・スタブ
-		String sqlstr = "insert into Spot (title,location,comment) values('" + inputTitle + "','" + inputLocation + "','" + inputComment + "');";
+		String sqlstr = "insert into Spot (title,comment) values('" + inputTitle + "','" + inputComment + "');";
 		try{
 			db.beginTransaction();
 			db.execSQL(sqlstr);

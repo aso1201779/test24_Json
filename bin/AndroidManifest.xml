@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.test24.MainActivity"
+            android:name="com.example.test24.Login"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,25 +30,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.test24.home" android:label="@string/app_name">
-        	<intent-filter>
-        		<action android:name="android.intent.action.MAIN"></action>
-        		<category android:name="android.intent.category.LAUNCHER"></category></intent-filter></activity>
-        <activity android:name="com.example.test24.member_entry" android:label="@string/app_name">
-        	<intent-filter>
-        		<action android:name="android.intent.action.MAIN"></action>
-        		<category android:name="android.intent.category.LAUNCHER"></category></intent-filter></activity>
-        <activity android:name="com.example.test24.Dmap" android:label="@string/app_name">
-        	<intent-filter>
-        		<action android:name="android.intent.action.MAIN"></action>
-        		<category android:name="android.intent.category.LAUNCHER"></category></intent-filter></activity>
-        <activity android:name="com.example.test24.D_entry" android:label="@string/app_name">
-        	<intent-filter>
-        		<action android:name="android.intent.action.MAIN"></action>
-        		<category android:name="android.intent.category.LAUNCHER"></category></intent-filter></activity>
-        <activity android:name="com.example.test24.Tab" android:label="@string/app_name">
-        	<intent-filter>
-        		<action android:name="android.intent.action.MAIN"></action>
-        		<category android:name="android.intent.category.LAUNCHER"></category></intent-filter></activity></application>
+        <activity android:name="com.example.test24.Home" android:label="@string/app_name"></activity>
+        <activity android:name="com.example.test24.Member_entry" android:label="@string/app_name"></activity>
+        <activity android:name="com.example.test24.Dmap" android:label="@string/app_name"></activity>
+        <activity android:name="com.example.test24.D_entry" android:label="@string/app_name"></activity></application>
 
 </manifest>

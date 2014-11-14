@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class home extends Activity implements View.OnClickListener{
+public class Home extends Activity implements View.OnClickListener{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +42,12 @@ public class home extends Activity implements View.OnClickListener{
 		// TODO 自動生成されたメソッド・スタブ
 		switch(v.getId()) {
 			case R.id.drive:
-				intent = new Intent(home.this, Tab.class);
+				intent = new Intent(Home.this, D_entry.class);
 				startActivity(intent);
 				break;
-			case R.id.imageButton2:
-				intent = new Intent(home.this,D_entry.class);
-				startActivity(intent);
+//			case R.id.imageButton2:
+//				intent = new Intent(Home.this,D_entry.class);
+//				startActivity(intent);
 
 		}
 

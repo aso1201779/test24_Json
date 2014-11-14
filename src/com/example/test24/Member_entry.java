@@ -19,7 +19,7 @@ import android.widget.Spinner;
 
 import com.example.test24.R.id;
 
-public class member_entry extends Activity implements View.OnClickListener{
+public class Member_entry extends Activity implements View.OnClickListener{
 
 	SQLiteDatabase db = null;
 	MySQLiteOpenHelper helper = null;
@@ -135,7 +135,7 @@ public class member_entry extends Activity implements View.OnClickListener{
 							@Override
 							public void onClick(DialogInterface dialog, int id) {
 								// TODO 自動生成されたメソッド・スタブ
-								Intent intent = new Intent(member_entry.this,MainActivity.class);
+								Intent intent = new Intent(Member_entry.this,Login.class);
 								startActivity(intent);
 							}
 						});
