@@ -32,7 +32,7 @@ public class Home extends Activity implements View.OnClickListener{
 		super.onResume();
 		ImageButton drive =(ImageButton)findViewById(R.id.drive);
 		drive.setOnClickListener(this);
-		ImageButton watch =(ImageButton)findViewById(R.id.imageButton2);
+		ImageButton watch =(ImageButton)findViewById(R.id.watch);
 		watch.setOnClickListener(this);
 	}
 
@@ -42,12 +42,12 @@ public class Home extends Activity implements View.OnClickListener{
 		// TODO 自動生成されたメソッド・スタブ
 		switch(v.getId()) {
 			case R.id.drive:
-				intent = new Intent(Home.this, D_entry.class);
+				intent = new Intent(Home.this, Dmap.class);
 				startActivity(intent);
 				break;
-//			case R.id.imageButton2:
-//				intent = new Intent(Home.this,D_entry.class);
-//				startActivity(intent);
+			case R.id.watch:
+				intent = new Intent(Home.this,W_Select.class);
+				startActivity(intent);
 
 		}
 

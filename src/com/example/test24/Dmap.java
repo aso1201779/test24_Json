@@ -20,8 +20,9 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 
-public class Dmap extends Activity implements LocationListener , View.OnClickListener{
+public class Dmap extends Activity implements LocationListener ,View.OnClickListener{
 
 	private WebView mWebView;
 	private LocationManager mLocationManager;
@@ -43,13 +44,18 @@ public class Dmap extends Activity implements LocationListener , View.OnClickLis
 
 		});
 
+
+
 	}
 
 	@Override
 	protected void onResume() {
+
+		Button MapEndBtn = (Button)findViewById(R.id.MapEndBtn);
+		MapEndBtn.setOnClickListener(this);
+
+
 		// TODO 自動生成されたメソッド・スタブ
-
-
 		if(mLocationManager != null){
 			mLocationManager.requestLocationUpdates(
 					LocationManager.GPS_PROVIDER,
@@ -92,39 +98,6 @@ public class Dmap extends Activity implements LocationListener , View.OnClickLis
 		        alertDlg.create().show();
 			}
 		super.onResume();
-	}
-
-	@Override
-	public void onClick(View v) {
-		// TODO 自動生成されたメソッド・スタブ
-//		AlertDialog.Builder alertDialogBuilder;
-//		AlertDialog alert;
-//			case R.id.endbtn:
-//				alertDialogBuilder = new AlertDialog.Builder(this);
-//				alertDialogBuilder.setMessage("ドライブを終了しますか？")
-//				.setPositiveButton("OK",new DialogInterface.OnClickListener() {
-//
-//					@Override
-//					public void onClick(DialogInterface dialog, int id) {
-//						// TODO 自動生成されたメソッド・スタブ
-//						Intent intent = new Intent(Dmap.this,home.class);
-//						startActivity(intent);
-//					}
-//				});
-//				//設定画面へ移動するかの問い合わせダイアログを表示
-//				//キャンセルボタン処理
-//				alertDialogBuilder.setNegativeButton("キャンセル",new DialogInterface.OnClickListener() {
-//
-//					@Override
-//					public void onClick(DialogInterface dialog, int id) {
-//						// TODO 自動生成されたメソッド・スタブ
-//						dialog.cancel();
-//					}
-//				});
-//				alert = alertDialogBuilder.create();
-//				alert.show();
-//				break;
-
 	}
 
 	@Override
@@ -218,6 +191,42 @@ public class Dmap extends Activity implements LocationListener , View.OnClickLis
 	public void onProviderDisabled(String provider) {
 		// TODO 自動生成されたメソッド・スタブ
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO 自動生成されたメソッド・スタブ
+		switch(v.getId()){
+			case R.id.MapEndBtn:
+				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+				alertDialogBuilder.setMessage("ドライブを終了しますか？")
+				.setCancelable(false)
+
+				//GPS設定画面起動用ボタンとイベントの定義
+				.setPositiveButton("終了",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int id) {
+								// TODO 自動生成されたメソッド・スタブ
+								Intent intent = new Intent(Dmap.this,D_entry.class);
+								startActivity(intent);
+							}
+				});
+				//キャンセルボタン処理
+				alertDialogBuilder.setNegativeButton("キャンセル",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int id) {
+								// TODO 自動生成されたメソッド・スタブ
+								dialog.cancel();
+							}
+						});
+				AlertDialog alert = alertDialogBuilder.create();
+				//設定画面へ移動するかの問い合わせダイアログを表示
+				alert.show();
+				break;
+		}
 	}
 
 }
