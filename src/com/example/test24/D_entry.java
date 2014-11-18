@@ -33,6 +33,8 @@ public class D_entry extends Activity implements View.OnClickListener{
 
 	SQLiteDatabase db = null;
 	MySQLiteOpenHelper helper = null;
+	String username;
+
 
 
 
@@ -60,20 +62,22 @@ public class D_entry extends Activity implements View.OnClickListener{
 				return;
 			}
 	}
-	
+
 	static final int REQUEST_CODE_CAMERA = 1; /* カメラを判定するコード */
 	static final int REQUEST_CODE_GALLERY = 2; /* ギャラリーを判定するコード */
-	
+
 	private Bitmap bm;
 	private Uri bitmapUri;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO 自動生成されたメソッド・スタブ
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.d_entry);
+		Intent intent = getIntent();
+		username = intent.getStringExtra("username");
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -93,13 +97,14 @@ public class D_entry extends Activity implements View.OnClickListener{
 		return super.onOptionsItemSelected(item);
 	}
 
-	
-	
+
+
 	@Override
 	public void onClick(View v) {
 		// TODO 自動生成されたメソッド・スタブ
+
 		switch(v.getId()) {
-		
+
 			case R.id.imageView1:
 				camera();
 				break;
@@ -109,7 +114,7 @@ public class D_entry extends Activity implements View.OnClickListener{
 			case R.id.imageView3:
 				camera();
 				break;
-	
+
 			case R.id.Send:
 				EditText title = (EditText)findViewById(R.id.Title);
 				EditText location = (EditText)findViewById(R.id.Location);
@@ -166,7 +171,7 @@ public class D_entry extends Activity implements View.OnClickListener{
 				break;
 		}
 	}
-	
+
 	protected void camera(){
 		// アップロードボタンが押された時
 		String[] str_items = {"カメラで撮影", "ギャラリーの選択", "キャンセル"};
@@ -190,7 +195,7 @@ public class D_entry extends Activity implements View.OnClickListener{
 				}
 		}).show();
 	}
-	
+
 	protected void wakeupCamera(){
 		File mediaStorageDir = new File(
 			Environment.getExternalStoragePublicDirectory(
@@ -257,6 +262,9 @@ public class D_entry extends Activity implements View.OnClickListener{
 		}
 	}
 	protected void endpop(){
+		Intent intent = getIntent();
+		final String un = intent.getStringExtra("username");
+
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder.setMessage("終了しました。")
 		.setCancelable(false)
@@ -269,6 +277,7 @@ public class D_entry extends Activity implements View.OnClickListener{
 					public void onClick(DialogInterface dialog, int id) {
 						// TODO 自動生成されたメソッド・スタブ
 						Intent intent = new Intent(D_entry.this,Home.class);
+						intent.putExtra("username", username);
 						startActivity(intent);
 					}
 		});

@@ -11,29 +11,43 @@
     tools:context="com.example.watch.W_random" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textRandom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/watchMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Button" />
+        android:text="このマップを見る" />
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/randomView"
         android:layout_width="match_parent"
         android:layout_height="304dp" >
     </ListView>
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Button" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/backbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="60dp"
+            android:text="選択画面に戻る" />
+
+        <Button
+            android:id="@+id/skipbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="スキップ" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -50,7 +50,7 @@
             android:layout_alignLeft="@+id/userID"
             android:layout_alignRight="@+id/userID"
             android:ems="10"
-            android:inputType="textPassword" >
+            android:inputType="textEmailAddress">
 
             <requestFocus />
         </EditText>
@@ -91,6 +91,7 @@
             android:layout_alignBaseline="@+id/textView2"
             android:layout_alignBottom="@+id/textView2"
             android:layout_alignLeft="@+id/member_entry"
+            android:inputType="textEmailAddress"
             android:ems="10" />
 
         <Button

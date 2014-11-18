@@ -16,7 +16,7 @@
         android:layout_weight="9" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/textRandom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
@@ -40,14 +40,14 @@
             android:orientation="horizontal" >
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/manbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
                 android:text="男" />
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/womanbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -65,10 +65,11 @@
         android:layout_weight="9" >
 
         <CheckBox
-            android:id="@+id/checkBox1"
+            android:id="@+id/Ten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
+            android:checked="false"
             android:text="10代" />
     </LinearLayout>
 
@@ -80,10 +81,11 @@
         android:layout_weight="9" >
 
         <CheckBox
-            android:id="@+id/CheckBox01"
+            android:id="@+id/Twenty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
+            android:checked="false"
             android:text="20代" />
 
     </LinearLayout>
@@ -96,10 +98,11 @@
         android:layout_weight="9" >
 
         <CheckBox
-            android:id="@+id/CheckBox02"
+            android:id="@+id/Thirty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
+            android:checked="false"
             android:text="30代" />
     </LinearLayout>
 
@@ -111,10 +114,11 @@
         android:layout_weight="9" >
 
         <CheckBox
-            android:id="@+id/CheckBox03"
+            android:id="@+id/Forty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
+            android:checked="false"
             android:text="40代" />
     </LinearLayout>
 
@@ -126,10 +130,11 @@
         android:layout_weight="9" >
 
         <CheckBox
-            android:id="@+id/CheckBox04"
+            android:id="@+id/Fifty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
+            android:checked="false"
             android:text="50代" />
 
     </LinearLayout>
@@ -142,10 +147,11 @@
         android:layout_weight="9" >
 
         <CheckBox
-            android:id="@+id/CheckBox05"
+            android:id="@+id/Sixty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
+            android:checked="false"
             android:text="60代以上" />
 
     </LinearLayout>

@@ -2,6 +2,8 @@ package com.example.test24;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,19 +12,27 @@ import android.widget.TextView;
 
 public class Home extends Activity implements View.OnClickListener{
 
+	int gest = 0;
+	String un;
+	String username;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO 自動生成されたメソッド・スタブ
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 
-		Intent intent = getIntent();
-		String username = intent.getStringExtra("username");
+
 		TextView tv = (TextView)findViewById(R.id.myname);
+		Intent intent = getIntent();
+		username = intent.getStringExtra("username");
+
 		if(username != null){
 			tv.setText("ようこそ" + username + "さん");
 		}else{
 			tv.setText("ようこそゲストさん");
+			gest = 1;
 		}
 	}
 
@@ -42,8 +52,26 @@ public class Home extends Activity implements View.OnClickListener{
 		// TODO 自動生成されたメソッド・スタブ
 		switch(v.getId()) {
 			case R.id.drive:
-				intent = new Intent(Home.this, Dmap.class);
-				startActivity(intent);
+				if(gest != 1){
+					intent = new Intent(Home.this, Dmap.class);
+					intent.putExtra("username", username);
+					startActivity(intent);
+				}else{
+					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+					alertDialogBuilder.setMessage("非会員はご利用になれません。")
+
+					.setPositiveButton("OK",
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int id) {
+							// TODO 自動生成されたメソッド・スタブ
+							dialog.cancel();
+						}
+					});
+					AlertDialog alert = alertDialogBuilder.create();
+					alert.show();
+				}
 				break;
 			case R.id.watch:
 				intent = new Intent(Home.this,W_Select.class);

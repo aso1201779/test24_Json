@@ -26,10 +26,13 @@ public class Dmap extends Activity implements LocationListener ,View.OnClickList
 
 	private WebView mWebView;
 	private LocationManager mLocationManager;
+	String username;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		//ロケーションマネージャを取得
 		mLocationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
 		setContentView(R.layout.dmap);
@@ -43,9 +46,8 @@ public class Dmap extends Activity implements LocationListener ,View.OnClickList
 			}
 
 		});
-
-
-
+		Intent intent = getIntent();
+		username = intent.getStringExtra("username");
 	}
 
 	@Override
@@ -210,6 +212,7 @@ public class Dmap extends Activity implements LocationListener ,View.OnClickList
 							public void onClick(DialogInterface dialog, int id) {
 								// TODO 自動生成されたメソッド・スタブ
 								Intent intent = new Intent(Dmap.this,D_entry.class);
+								intent.putExtra("username", username);
 								startActivity(intent);
 							}
 				});
