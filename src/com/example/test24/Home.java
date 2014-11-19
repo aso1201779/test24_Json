@@ -15,6 +15,7 @@ public class Home extends Activity implements View.OnClickListener{
 	int gest = 0;
 	String un;
 	String username;
+	String userID;
 
 
 	@Override
@@ -27,6 +28,7 @@ public class Home extends Activity implements View.OnClickListener{
 		TextView tv = (TextView)findViewById(R.id.myname);
 		Intent intent = getIntent();
 		username = intent.getStringExtra("username");
+		userID = intent.getStringExtra("userID");
 
 		if(username != null){
 			tv.setText("ようこそ" + username + "さん");
@@ -55,6 +57,7 @@ public class Home extends Activity implements View.OnClickListener{
 				if(gest != 1){
 					intent = new Intent(Home.this, Dmap.class);
 					intent.putExtra("username", username);
+					intent.putExtra("userID", userID);
 					startActivity(intent);
 				}else{
 					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -75,6 +78,8 @@ public class Home extends Activity implements View.OnClickListener{
 				break;
 			case R.id.watch:
 				intent = new Intent(Home.this,W_Select.class);
+				intent.putExtra("username", username);
+				intent.putExtra("userID", userID);
 				startActivity(intent);
 
 		}

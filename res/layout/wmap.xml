@@ -8,14 +8,8 @@
     android:layout_marginTop="0dp"
     tools:context=".Dmap" >
 
-    <WebView
-        android:id="@+id/webview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.5" />
-
     <Button
-        android:id="@+id/MapEndBtn"
+        android:id="@+id/MapEnd"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_gravity="right"
@@ -24,16 +18,13 @@
         android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:background="#aa000000"
-        android:text="END"
+        android:text="終了"
         android:textColor="#aaffffff" />
 
     <ImageView
-        android:id="@+id/cameraBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/camera" />
+        android:id="@+id/Wimage"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
 
 </FrameLayout>

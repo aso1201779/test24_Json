@@ -3,6 +3,7 @@ package com.example.test24;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -118,5 +119,7 @@ public class Login extends Activity implements View.OnClickListener{
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
+
 
 }

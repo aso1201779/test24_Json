@@ -59,6 +59,11 @@ public class Member_entry extends Activity implements View.OnClickListener{
 	EditText aaa;
 	EditText bbb;
 	EditText ccc;
+	String inputID;
+	String inputpass;
+	String inputname;
+	String inputyear;
+	String inputseibetu;
 //
 //	private InputFilter[] filters = { new MyFilter() };
 //
@@ -243,7 +248,7 @@ public class Member_entry extends Activity implements View.OnClickListener{
 
 					if(inputID.length() > 5 && inputpass.length() > 5){
 
-//						exec_post();
+						//exec_post();
 						helper.insertMember(db, inputID, inputpass, inputname, inputyear, inputseibetu);
 
 
@@ -299,7 +304,7 @@ public class Member_entry extends Activity implements View.OnClickListener{
 //		    // URL
 //		    URI url = null;
 //		    try {
-//		      url = new URI( "http://54.68.202.192/test.php" );
+//		      url = new URI( "http://54.68.202.192/menberinsert.php" );
 //		      Log.d("posttest", "URLはOK");
 //		    } catch (URISyntaxException e) {
 //		      e.printStackTrace();
@@ -318,7 +323,13 @@ public class Member_entry extends Activity implements View.OnClickListener{
 //
 //
 //		    HashMap<String, Object> hashMap = new HashMap<String, Object>();
-//		    hashMap.put("userID", "1201769");
+//		    hashMap.put("menberID", inputID);
+//		    hashMap.put("password",inputpass );
+//		    hashMap.put("username", inputname);
+//		    hashMap.put("birthyear", inputyear);
+//		    hashMap.put("seibetu", inputseibetu);
+//
+//
 //		    //オブジェクトクラスHashMap　キーワードと値をペアでセット
 //
 //		    try {

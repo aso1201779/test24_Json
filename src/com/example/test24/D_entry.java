@@ -34,6 +34,11 @@ public class D_entry extends Activity implements View.OnClickListener{
 	SQLiteDatabase db = null;
 	MySQLiteOpenHelper helper = null;
 	String username;
+	int viewID ;
+	private Bitmap bm;
+	private Uri bitmapUri;
+	static final int REQUEST_CODE_CAMERA = 1; /* カメラを判定するコード */
+	static final int REQUEST_CODE_GALLERY = 2; /* ギャラリーを判定するコード */
 
 
 
@@ -63,11 +68,7 @@ public class D_entry extends Activity implements View.OnClickListener{
 			}
 	}
 
-	static final int REQUEST_CODE_CAMERA = 1; /* カメラを判定するコード */
-	static final int REQUEST_CODE_GALLERY = 2; /* ギャラリーを判定するコード */
 
-	private Bitmap bm;
-	private Uri bitmapUri;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,12 +107,15 @@ public class D_entry extends Activity implements View.OnClickListener{
 		switch(v.getId()) {
 
 			case R.id.imageView1:
+				viewID = 1;
 				camera();
 				break;
 			case R.id.imageView2:
+				viewID = 2;
 				camera();
 				break;
 			case R.id.imageView3:
+				viewID = 3;
 				camera();
 				break;
 
@@ -131,7 +135,7 @@ public class D_entry extends Activity implements View.OnClickListener{
 
 
 						AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-						alertDialogBuilder.setMessage("登録完了しました。")
+						alertDialogBuilder.setMessage("登録完了しました。\n登録を続けますか？")
 						.setCancelable(false)
 
 						//GPS設定画面起動用ボタンとイベントの定義
@@ -168,6 +172,15 @@ public class D_entry extends Activity implements View.OnClickListener{
 					Rtitle.setText("");
 					EditText Rcomment = (EditText)findViewById(R.id.Comment);
 					Rcomment.setText("");
+					EditText Rlacation = (EditText)findViewById(R.id.Location);
+					Rlacation.setText("");
+
+					ImageView imageView1 =(ImageView)findViewById(R.id.imageView1);
+					imageView1.setImageResource(R.drawable.noimage);
+					ImageView imageView2 =(ImageView)findViewById(R.id.imageView2);
+					imageView2.setImageResource(R.drawable.noimage);
+					ImageView imageView3 =(ImageView)findViewById(R.id.imageView3);
+					imageView3.setImageResource(R.drawable.noimage);
 				break;
 		}
 	}
@@ -257,8 +270,24 @@ public class D_entry extends Activity implements View.OnClickListener{
 					}
 				break;
 			}
-			ImageView imageView1 =(ImageView)findViewById(R.id.imageView1);
-			imageView1.setImageBitmap(bm); // imgView（イメージビュー）を準備しておく
+			switch(viewID){
+			case 1:
+				ImageView imageView1 =(ImageView)findViewById(R.id.imageView1);
+				imageView1.setImageBitmap(bm); // imgView（イメージビュー）を準備しておく
+				bm = null;
+				break;
+			case 2:
+				ImageView imageView2 =(ImageView)findViewById(R.id.imageView2);
+				imageView2.setImageBitmap(bm); // imgView（イメージビュー）を準備しておく
+				bm = null;
+				break;
+			case 3:
+				ImageView imageView3 =(ImageView)findViewById(R.id.imageView3);
+				imageView3.setImageBitmap(bm); // imgView（イメージビュー）を準備しておく
+				bm = null;
+				break;
+			}
+
 		}
 	}
 	protected void endpop(){

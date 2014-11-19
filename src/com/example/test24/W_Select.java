@@ -18,12 +18,19 @@ public class W_Select extends Activity implements View.OnClickListener {
 	CheckBox fifty;
 	CheckBox sixty;
 	String sei = null;
+	String username;
+	String userID;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO 自動生成されたメソッド・スタブ
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.w_select);
+
+		Intent intent = getIntent();
+		username = intent.getStringExtra("username");
+		userID = intent.getStringExtra("userID");
 
 		// ラジオグループ
 				final RadioGroup rgSelect = (RadioGroup)findViewById(R.id.radiogroup_id);
@@ -76,7 +83,11 @@ public class W_Select extends Activity implements View.OnClickListener {
 					(ten.isChecked() ||twenty.isChecked() ||thirty.isChecked() ||
 					forty.isChecked() ||fifty.isChecked() ||sixty.isChecked() == true)){
 
+
 					intent = new Intent(W_Select.this,W_Random.class);
+					intent.putExtra("sei", sei);
+					intent.putExtra("username", username);
+					intent.putExtra("userID", userID);
 					startActivity(intent);
 				}
 			break;
