@@ -7,16 +7,12 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.MediaScannerConnection;
-import android.media.MediaScannerConnection.OnScanCompletedListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -242,17 +238,13 @@ public class D_entry extends Activity implements View.OnClickListener{
 
 			switch(requestCode){
 				case 1: // ギャラリーの場合
-					try{
-						ContentResolver cr = getContentResolver();
-						String[] columns = {MediaStore.Images.Media.DATA};
-						Cursor c = cr.query(data.getData(), columns, null, null, null);
-						c.moveToFirst();
-						bitmapUri = Uri.fromFile(new File(c.getString(0)));
+					try {
 						InputStream is = getContentResolver().openInputStream(data.getData());
-						bm = BitmapFactory.decodeStream(is, null, options);
+						bm = BitmapFactory.decodeStream(is);
 						is.close();
-					}catch(Exception e){
-						e.printStackTrace();
+						// 選択した画像を表示
+					} catch (Exception e) {
+
 					}
 				break;
 			}
