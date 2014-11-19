@@ -1,11 +1,27 @@
 package com.example.test24;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,7 +30,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -42,15 +57,25 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class Dmap extends Activity implements LocationListener ,View.OnClickListener{
 
 	private WebView mWebView;
 	private LocationManager mLocationManager;
 	String username;
+	String userID;
+	String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
 	private Bitmap bm;
 	private Uri bitmapUri;
 	static final int REQUEST_CODE_CAMERA = 1; /* カメラを判定するコード */
+
+	private TextView tv = null;
+	private JSONArray rootObjectArray;
+
 
 
 	@Override
@@ -72,6 +97,7 @@ public class Dmap extends Activity implements LocationListener ,View.OnClickList
 		});
 		Intent intent = getIntent();
 		username = intent.getStringExtra("username");
+		userID = intent.getStringExtra("userID");
 		ImageView cameraBtn =(ImageView)findViewById(R.id.cameraBtn);
 		cameraBtn.setOnClickListener(this);
 	}
@@ -238,6 +264,9 @@ public class Dmap extends Activity implements LocationListener ,View.OnClickList
 							public void onClick(DialogInterface dialog, int id) {
 								// TODO 自動生成されたメソッド・スタブ
 
+								//Json呼び出し
+								exec_post();
+
 								// 取ったキャプチャの幅と高さを元に
 		                        // 新しいBitmapを生成する。
 		                        Bitmap  bitmap = Bitmap.createBitmap(
@@ -384,5 +413,127 @@ public class Dmap extends Activity implements LocationListener ,View.OnClickList
             throw e;
         }
     }
+
+    private void exec_post() {
+
+	    Log.d("posttest", "postします");
+
+	    HashMap<String,Object> ret = null;
+
+	    // URL
+	    URI url = null;
+	    try {
+	      url = new URI( "http://54.68.202.192/mapinsert.php" );
+	      Log.d("posttest", "URLはOK");
+	    } catch (URISyntaxException e) {
+	      e.printStackTrace();
+	      //String code =toString(ret.getStatusLine().getStatusCode());
+	      //ret = e.toString();
+	    }
+
+	    // POSTパラメータ付きでPOSTリクエストを構築
+	    HttpPost request = new HttpPost( url );
+
+	    /*
+	    List<NameValuePair> post_params\e = new ArrayList<NameValuePair>();
+	    post_params.add(new BasicNameValuePair("post_1", "ユーザID"));
+	    post_params.add(new BasicNameValuePair("post_2", "パスワード"));
+	    */
+
+
+	    HashMap<String, Object> hashMap = new HashMap<String, Object>();
+	    hashMap.put("menberID", userID);
+	    hashMap.put("mapID", ); //mapIDはどう指定したらいいの？
+	    hashMap.put("mapdate", date);
+
+
+	    //オブジェクトクラスHashMap　キーワードと値をペアでセット
+
+	    try {
+		    request.setHeader("Content-Type", "application/json; charset=utf-8");
+		    //
+		    Type mapType = new TypeToken<HashMap<String, Object>>() {}.getType();
+		    //HashMapをJSONに変換
+		    request.setEntity(new StringEntity(new Gson().toJson(hashMap, mapType)));
+		    //同上
+
+		    /*
+		    // 送信パラメータのエンコードを指定
+	        request.setEntity(new UrlEncodedFormEntity(post_params, "UTF-8"));
+	        */
+
+	    } catch (UnsupportedEncodingException e1) {
+	        e1.printStackTrace();
+	    }
+
+	    // POSTリクエストを実行
+	    DefaultHttpClient httpClient = new DefaultHttpClient();
+	    try {
+	      Log.d("posttest", "POST開始");
+
+	      // POSTを実行して、戻ってきたJSONをHashMapの形にして受け取る
+	      ret = httpClient.execute(request, new MyResponseHandler());
+	      //
+	      String menberID = (String)ret.get("menberID");
+	      tv.setText( menberID );
+
+	    } catch (IOException e) {
+	      Log.d("posttest", "通信に失敗：" + e.toString());
+	    } finally {
+	      // shutdownすると通信できなくなる
+	      httpClient.getConnectionManager().shutdown();
+	    }
+
+	    // 受信結果をUIに表示
+}
+ public class MyResponseHandler implements ResponseHandler<HashMap<String,Object>> {
+
+		@Override
+		public HashMap<String,Object> handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
+			// TODO 自動生成されたメソッド・スタブ
+			//		          Log.d(
+			//		            "posttest",
+			//		            "レスポンスコード：" + response.getStatusLine().getStatusCode()
+
+			HashMap<String,Object> retMap = new HashMap<String,Object>();
+
+            // 正常に受信できた場合は200
+	          switch (response.getStatusLine().getStatusCode()) {
+		          case HttpStatus.SC_OK:
+		            Log.d("posttest", "レスポンス取得に成功");
+
+		            try {
+		            		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		            		response.getEntity().writeTo(outputStream);
+		            		String data;
+		            		data = outputStream.toString(); // JSONデータ
+		            		rootObjectArray = new JSONArray(data);
+
+		            		JSONObject jsonobject = rootObjectArray.getJSONObject(0);
+
+		            		String menberID = jsonobject.getString("menberID");
+
+		            		//返り値がわからんから橋本に聞く
+
+		            		retMap.put("menberID", menberID);
+
+		            } catch (Exception e) {
+		            	Log.d("Member_entry. Json取得エラー", "Error");
+		            }
+
+		            break;
+
+		          case HttpStatus.SC_NOT_FOUND:
+		            Log.d("posttest", "データが存在しない");
+		            break;
+
+		          default:
+		            Log.d("posttest", "通信エラー");
+		            break;
+	          }
+	          return retMap;
+
+		}
+ }
 
 }
