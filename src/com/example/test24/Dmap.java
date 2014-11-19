@@ -72,8 +72,8 @@ public class Dmap extends Activity implements LocationListener ,View.OnClickList
 		});
 		Intent intent = getIntent();
 		username = intent.getStringExtra("username");
-		ImageView imageView1 =(ImageView)findViewById(R.id.imageView1);
-		imageView1.setOnClickListener(this);
+		ImageView cameraBtn =(ImageView)findViewById(R.id.cameraBtn);
+		cameraBtn.setOnClickListener(this);
 	}
 
 	@Override
@@ -302,9 +302,9 @@ public class Dmap extends Activity implements LocationListener ,View.OnClickList
 			case R.id.cameraBtn:
 
 				// アップロードボタンが押された時
-				String[] str_items = {"カメラで撮影", "ギャラリーの選択", "キャンセル"};
+				String[] str_items = {"カメラを起動", "キャンセル"};
 				new AlertDialog.Builder(this)
-				.setTitle("写真をアップロード")
+				.setTitle("写真を撮影しますか？")
 				.setItems(str_items, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -313,10 +313,10 @@ public class Dmap extends Activity implements LocationListener ,View.OnClickList
 							case 0:
 								wakeupCamera(); // カメラ起動
 								break;
-							default:
+							case 2:
 								// キャンセルを選んだ場合
 								break;
-									}
+							}
 						}
 				}).show();
 

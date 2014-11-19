@@ -155,6 +155,7 @@ public class D_entry extends Activity implements View.OnClickListener{
 									public void onClick(DialogInterface dialog, int id) {
 										// TODO 自動生成されたメソッド・スタブ
 										Intent intent = new Intent(D_entry.this,D_entry.class);
+										intent.putExtra("username", username);
 										startActivity(intent);
 									}
 								});
@@ -187,7 +188,7 @@ public class D_entry extends Activity implements View.OnClickListener{
 
 	protected void camera(){
 		// アップロードボタンが押された時
-		String[] str_items = {"カメラで撮影", "ギャラリーの選択", "キャンセル"};
+		String[] str_items = {"ギャラリーの選択", "キャンセル"};
 		new AlertDialog.Builder(this)
 		.setTitle("写真をアップロード")
 		.setItems(str_items, new DialogInterface.OnClickListener() {
@@ -196,9 +197,6 @@ public class D_entry extends Activity implements View.OnClickListener{
 				// TODO 自動生成されたメソッド・スタブ
 				switch(which){
 					case 0:
-						wakeupCamera(); // カメラ起動
-						break;
-					case 1:
 						wakeupGallery(); // ギャラリー起動
 						break;
 					default:
@@ -243,19 +241,7 @@ public class D_entry extends Activity implements View.OnClickListener{
 			options.inSampleSize = 4; // 元の1/4サイズでbitmap取得
 
 			switch(requestCode){
-				case 1: // カメラの場合
-					bm = BitmapFactory.decodeFile(bitmapUri.getPath(), options);
-					// 撮影した画像をギャラリーのインデックスに追加されるようにスキャンする。
-					// これをやらないと、アプリ起動中に撮った写真が反映されない
-					String[] paths = {bitmapUri.getPath()};
-					String[] mimeTypes = {"image/*"};
-					MediaScannerConnection.scanFile(getApplicationContext(), paths, mimeTypes, new OnScanCompletedListener(){
-						@Override
-						public void onScanCompleted(String path, Uri uri){
-						}
-					});
-					break;
-				case 2: // ギャラリーの場合
+				case 1: // ギャラリーの場合
 					try{
 						ContentResolver cr = getContentResolver();
 						String[] columns = {MediaStore.Images.Media.DATA};
